@@ -7,7 +7,7 @@ import (
 
 	"example.com/m/v2/models"
 	"example.com/m/v2/secretm"
-	_ "github.com/go-sql-driver/mysql"
+	_ "github.com/lib/pq"
 )
 
 var SecretModel models.SecretRDSJson
@@ -42,7 +42,9 @@ func ConnStr(claves models.SecretRDSJson) string {
 	authToken = claves.Password
 	dbEndpoint = claves.Host
 	dbName = "postgres"
-	dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s?allowCleartextPasswords=true", dbUser, authToken, dbEndpoint, dbName)
+
+	// Cambia la cadena de conexión a PostgreSQL
+	dsn := fmt.Sprintf("postgres://%s:%s@%s:5432/%s?sslmode=require", dbUser, authToken, dbEndpoint, dbName)
 	fmt.Println(dsn)
 	return dsn
 }

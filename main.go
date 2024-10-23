@@ -10,10 +10,11 @@ import (
 	"example.com/m/v2/bd"
 	"example.com/m/v2/models"
 	"github.com/aws/aws-lambda-go/events"
+	"github.com/aws/aws-lambda-go/lambda"
 )
 
 func main() {
-
+	lambda.Start(EjecutoLambda)
 }
 
 func EjecutoLambda(ctx context.Context, event events.CognitoEventUserPoolsPostConfirmation) (events.CognitoEventUserPoolsPostConfirmation, error) {

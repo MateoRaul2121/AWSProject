@@ -1,5 +1,2 @@
-set GOOS=linux
-set GOARCH=amd64
-go build main.go
-del main.zip
-tar.exe -a -cf main.zip main
+$env:GOARCH="amd64"; $env:GOOS="linux"; go build -ldflags="-s -w" -o bootstrap main.go; Compress-Archive -Path bootstrap -DestinationPath main.zip
+
